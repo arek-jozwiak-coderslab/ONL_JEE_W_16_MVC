@@ -5,8 +5,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.WebUtils;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 
 @Controller
@@ -16,8 +21,18 @@ public class HelloController {
 
     @GetMapping("/hello")
     @ResponseBody
-    public String helloWorld() {
+    public String helloWorld(HttpServletRequest request) {
+        Cookie c = WebUtils.getCookie(request, "cookie2");
         return "Hello World";
+    }
+
+    @RequestMapping("/session2")
+    @ResponseBody
+    public String session2(HttpSession ses) {
+        int sesMax = (int)ses.getAttribute("max");
+
+        System.out.println(sesMax);
+        return "session";
     }
 
     @GetMapping("/helloView")
