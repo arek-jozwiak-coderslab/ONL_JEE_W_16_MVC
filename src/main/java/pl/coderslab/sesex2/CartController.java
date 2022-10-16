@@ -17,7 +17,6 @@ public class CartController {
         this.cart = cart;
     }
 
-
     @RequestMapping("/addtocart")
     @ResponseBody
     public String addtocart() {
